@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function($scope, $rootScope) {
+  const handlers = [];
+  const lastValues = {};
+
+  const g_form = $scope.page.g_form;
+  g_form.getFieldNames().forEach(function (fieldName) { 
+		const field = g_form.getField(fieldName);
+		if (field.type != 'sc_multi_row') {
+			return;
+		}
+
+		const unregister = $rootScope.$on('field.change.' + fieldName, function ($event, data) {			
+			// Note: data.oldValue is the *original* value (upon form load) ...
+			const operation = (function (oldData, newData) {
+				if (newData.length > oldData.length) {
+					return 'create';
+				} else if (newData.length < oldData.length) {
+					return 'delete';
+				} else {
+					return 'update';
+				}
+			})(JSON.parse(lastValues[fieldName] || '[]'), JSON.parse(data.newValue || '[]'));
+
+			// ... because of this, we simply preserve a copy of the previous value
+			lastValues[fieldName] = data.newValue;
+
+			CustomEvent.fire('scp_mrvs_changed', fieldName, operation);
+		});
+		
+		handlers.push(unregister);
+	});
+
+	$scope.$on('$destroy', function () {
+		handlers.forEach(function (fn) { fn(); });
+	});
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>SC+ MRVS Observer</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>markus.kraus</sys_created_by>
+        <sys_created_on>2024-08-01 14:15:28</sys_created_on>
+        <sys_id>4cda1bbc933f4210e02873718bba10b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>SC+ MRVS Observer</sys_name>
+        <sys_package display_value="ServiceCatalog+ MRVS Observer" source="x_376096_mrvs_obs">420a573893fb4210e02873718bba104b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ServiceCatalog+ MRVS Observer">420a573893fb4210e02873718bba104b</sys_scope>
+        <sys_update_name>sp_widget_4cda1bbc933f4210e02873718bba10b5</sys_update_name>
+        <sys_updated_by>markus.kraus</sys_updated_by>
+        <sys_updated_on>2024-08-01 14:15:28</sys_updated_on>
+        <template><![CDATA[<div><!-- your widget template --></div>]]></template>
+    </sp_widget>
+</record_update>

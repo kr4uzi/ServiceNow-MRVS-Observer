@@ -15,7 +15,7 @@
         <license_model>none</license_model>
         <logo>a68b97f0937f4210e02873718bba10c7</logo>
         <menu display_value="Service Catalog">d128ead2c0a8016501c6bbd3f9c03678</menu>
-        <name>ServiceCatalog+ MRVS Observer</name>
+        <name>Service Catalog+ MRVS Observer</name>
         <package_json/>
         <private>false</private>
         <restrict_table_access>false</restrict_table_access>
@@ -32,9 +32,9 @@
         <sys_created_by>markus.kraus</sys_created_by>
         <sys_created_on>2024-08-01 14:11:10</sys_created_on>
         <sys_id>420a573893fb4210e02873718bba104b</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_updated_by>markus.kraus</sys_updated_by>
-        <sys_updated_on>2024-08-01 14:17:46</sys_updated_on>
+        <sys_updated_on>2024-08-01 15:43:19</sys_updated_on>
         <template/>
         <trackable>true</trackable>
         <uninstall_blocked>false</uninstall_blocked>
